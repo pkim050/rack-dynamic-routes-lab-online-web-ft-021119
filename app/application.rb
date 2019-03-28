@@ -7,7 +7,7 @@ class Application
     binding.pry
     if req.path.match(/items/)
       item_name = req.path.split("/items/").last
-      binding.pry
+      #binding.pry
       temp = @@items.find {|element| element.name == item_name}
       if temp != nil
         resp.write temp.price
