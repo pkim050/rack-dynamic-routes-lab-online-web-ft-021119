@@ -5,11 +5,12 @@ class Application
     resp = Rack::Response.new
     req = Rack::Request.new(env)
     binding.pry
-    if req.path == "/items/"
+    if req.path.match(/items/)
       item_name = req.path.split("/items/").last
       binding.pry
-      temp = @@items.collect {|element| element.price if element.name == item_name}
+      temp = @@items.find {|element| element.name == item_name}
       if temp != nil
+        resp.write temp.price
         resp.status = 200
       else
         resp.write "Route not found"
